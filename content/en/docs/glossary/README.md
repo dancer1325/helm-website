@@ -15,5 +15,18 @@
   * gzipped
   * signed optionally
 
+# Subcharts
+* == Chart dependency      
+* if you package a chart (`helm package`) → all chart’s dependencies are bundled with it   -- Check 'charts/withdependencies' --
+* types
+  * soft          -- Check 'charts/softsubchart' --
+    * := chart can work / without being installed previously the other chart
+    * NO tools provided by helm
+  * hard          -- Check 'charts/withdependencies' --
+    * := chart / — depends on — another chart
+      * 👁️must be placed under `charts/` 👁️
+      * once the chart is installed → all the dependencies are installed
+    * chart + chart’s dependencies — are managed as — a collection
+
 # Notes
 * Chart of example can be found under the repo 'helm-examples/'
