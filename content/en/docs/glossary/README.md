@@ -28,5 +28,13 @@
       * once the chart is installed → all the dependencies are installed
     * chart + chart’s dependencies — are managed as — a collection
 
+# Chart Version
+* follows https://semver.org/   -- Check 'Chart.yaml' -- 
+
+# `helm`
+* CLI 
+
+
+
 # Notes
 * Chart of example can be found under the repo 'helm-examples/'
