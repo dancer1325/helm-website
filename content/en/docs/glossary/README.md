@@ -56,5 +56,15 @@
   * chart repository server or
   * any HTTP server
 
+# Release
+* once `helm install` → it’s created              -- Check 'helm-examples' repo --
+  * different release name / installation
+* allows
+  * tracking the installation
+
+# Release Number
+* allows                                          -- Check 'helm-examples' repo --
+  * tracking the different releases’ changes
+
 # Notes
-* Chart of example can be found under the repo 'helm-examples/'
+* Chart of example can be found under the repo 'helm-examples'
