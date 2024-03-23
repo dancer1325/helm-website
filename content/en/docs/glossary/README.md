@@ -57,6 +57,7 @@
   * any HTTP server
 
 # Release
+* := Running instance of a chart + specific config
 * once `helm install` → it’s created              -- Check 'helm-examples' repo --
   * different release name / installation
 * allows
@@ -66,9 +67,11 @@
 * allows                                          -- Check 'helm-examples' repo --
   * tracking the different releases’ changes
 
-# Helm clients
+# Helm library / SDK
+* https://pkg.go.dev/helm.sh/helm/v3
+
+# Helm client
 * CLI
-* [SDK](https://pkg.go.dev/helm.sh/helm/v3)
 
 # Chart Repository / Repo
 * := HTTP servers which
