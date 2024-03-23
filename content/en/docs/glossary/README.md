@@ -66,5 +66,30 @@
 * allows                                          -- Check 'helm-examples' repo --
   * tracking the different releases’ changes
 
+# Helm clients
+* CLI
+* [SDK](https://pkg.go.dev/helm.sh/helm/v3)
+
+# Chart Repository / Repo
+* := HTTP servers which
+  * store helm charts                             -- Check 'helm-examples' repo --
+  * serves an `index.yaml` /                      -- _Example:_ https://github.com/artifacthub/hub/blob/master/docs/chart/index.yaml -- 
+    * describes a batch of charts
+    * path to downloads the charts
+* helm clients — can point to — several chart repositories
+
+# Chart Registry 
+* := Storage & Distribution system for Helm chart packages
+  * OCI-based
+* can contain ≥ 0 Chart Repository
+
+# Values
+* == configuration settings for the charts
+* 'Values.yaml'
+  * default config
+* ways to pass customized values
+  * `-f otherValue.yaml`
+  * `--set key=value`
+
 # Notes
 * Chart of example can be found under the repo 'helm-examples'
