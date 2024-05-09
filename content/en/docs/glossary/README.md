@@ -75,10 +75,12 @@
 
 # Chart Repository / Repo
 * := HTTP servers which
-  * store helm charts                             -- Check 'helm-examples' repo --
-  * serves an `index.yaml` /                      -- _Example:_ https://github.com/artifacthub/hub/blob/master/docs/chart/index.yaml -- 
-    * describes a batch of charts
-    * path to downloads the charts
+  * store packaged helm charts                             -- Check 'helm-examples' repo --
+  * serves an `index.yaml`                       -- _Example:_ https://github.com/artifacthub/hub/blob/master/docs/chart/index.yaml -- 
+    * /
+      * describes a batch of charts
+      * path to downloads the charts
+    * — can be created via — `helm repo index`
 * helm clients — can point to — several chart repositories
 
 # Chart Registry 
