@@ -15,3 +15,6 @@
   * `helm install skeleton .`
     * Problems: "chartName"
       * Solution: Rename the parent chart
+## manage manually via “charts/”
+* == copy the dependant unpacked charts under “charts/”
+  * `helm pull -- untar`
