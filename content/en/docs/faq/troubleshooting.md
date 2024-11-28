@@ -7,25 +7,24 @@ weight: 4
 
 ### I am getting a warning about "Unable to get an update from the "stable" chart repository"
 
-Run `helm repo list`. If it shows your `stable` repository pointing to a `storage.googleapis.com` URL, you
-will need to update that repository. On November 13, 2020, the Helm Charts repo [became unsupported](https://github.com/helm/charts#deprecation-timeline) after a year-long deprecation. An archive has been made available at
-`https://charts.helm.sh/stable` but will no longer receive updates. 
+* if you are using `storage.googleapis.com` URL -- for the -- `stable` repository -> update the url
 
-You can run the following command to fix your repository:
+    ```console
+    $ helm repo add stable https://charts.helm.sh/stable --force-update  
+    ```
+  
+  * Reason: 🧠 Helm Charts repo [became unsupported](https://github.com/helm/charts#deprecation-timeline) 🧠 
 
-```console
-$ helm repo add stable https://charts.helm.sh/stable --force-update  
-```
+* if you are using `storage.googleapis.com` URL -- for the -- `incubator` repository -> update the url
 
-The same goes for the `incubator` repository, which has an archive available at https://charts.helm.sh/incubator.
-You can run the following command to repair it:
-
-```console
-$ helm repo add incubator https://charts.helm.sh/incubator --force-update  
-```
+    ```console
+    $ helm repo add incubator https://charts.helm.sh/incubator --force-update  
+    ```
+  * Reason: 🧠 == previous one 🧠
 
 ### I am getting the warning 'WARNING: "kubernetes-charts.storage.googleapis.com" is deprecated for "stable" and will be deleted Nov. 13, 2020.'
 
+* TODO:
 The old Google helm chart repository has been replaced by a new Helm chart repository.
 
 Run the following command to permanently fix this:
