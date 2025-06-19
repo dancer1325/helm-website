@@ -4,43 +4,53 @@ description: "Built-in objects available to templates."
 weight: 3
 ---
 
-Objects are passed into a template from the template engine. And your code can
-pass objects around (we'll see examples when we look at the `with` and `range`
-statements). There are even a few ways to create new objects within your
-templates, like with the `tuple` function we'll see later.
+* Objects
+  * uses
+    * FROM template engine, are passed -- into a -- template
+  * ways to create NEW objects | your templates
+    * `tuple` function
+  * can contain
+    * 1 value
+    * OTHER objects or functions
+      * _Examples:_ `Release`, `Files`
 
-Objects can be simple, and have just one value. Or they can contain other
-objects or functions. For example, the `Release` object contains several objects
-(like `Release.Name`) and the `Files` object has a few functions.
+# `Release`
+- allows
+  - describing the release itself
+- `Release.Name`
+- `Release.Namespace`
+  - if the manifest does NOT override -> namespace | be released into
+- `Release.IsUpgrade`
+  - if the current operation == upgrade or rollback -> `true` 
+- `Release.IsInstall`
+  - if the current operation == install -> `true` 
+- `Release.Revision`
+  - == release's revision number
+  - | install, == 1
+  - +1 / EAC upgrade OR rollback
+- `Release.Service`
+  - service / render the template
+  - | Helm, (ALWAYS) == `Helm`
 
-In the previous section, we use `{{ .Release.Name }}` to insert the name of a
-release into a template. `Release` is one of the top-level objects that you can
-access in your templates.
+# `Values`
+* == values passed | template
+  * 👀-- from the -- `values.yaml` file + user-supplied files👀
+  * by default, empty
 
-- `Release`: This object describes the release itself. It has several objects
-  inside of it:
-  - `Release.Name`: The release name
-  - `Release.Namespace`: The namespace to be released into (if the manifest
-    doesn’t override)
-  - `Release.IsUpgrade`: This is set to `true` if the current operation is an
-    upgrade or rollback.
-  - `Release.IsInstall`: This is set to `true` if the current operation is an
-    install.
-  - `Release.Revision`: The revision number for this release. On install, this
-    is 1, and it is incremented with each upgrade and rollback.
-  - `Release.Service`: The service that is rendering the present template. On
-    Helm, this is always `Helm`.
-- `Values`: Values passed into the template from the `values.yaml` file and from
-  user-supplied files. By default, `Values` is empty.
-- `Chart`: The contents of the `Chart.yaml` file. Any data in `Chart.yaml` will
+# `Chart`
+* TODO: The contents of the `Chart.yaml` file. Any data in `Chart.yaml` will
   be accessible here. For example `{{ .Chart.Name }}-{{ .Chart.Version }}` will
   print out the `mychart-0.1.0`.
   - The available fields are listed in the [Charts Guide]({{< ref
     "/docs/topics/charts.md#the-chartyaml-file" >}})
-- `Subcharts`: This provides access to the scope (.Values, .Charts, .Releases etc.)
+
+# `Subcharts`
+This provides access to the scope (.Values, .Charts, .Releases etc.)
   of subcharts to the parent. For example `.Subcharts.mySubChart.myValue` to access
   the `myValue` in the `mySubChart` chart.
-- `Files`: This provides access to all non-special files in a chart. While you
+
+# `Files`
+This provides access to all non-special files in a chart. While you
   cannot use it to access templates, you can use it to access other files in the
   chart. See the section [Accessing Files]({{< ref
     "/docs/chart_template_guide/accessing_files.md" >}}) for more.
@@ -56,7 +66,9 @@ access in your templates.
   - `Files.AsSecrets` is a function that returns the file bodies as Base 64
     encoded strings.
   - `Files.AsConfig` is a function that returns file bodies as a YAML map.
-- `Capabilities`: This provides information about what capabilities the
+
+# `Capabilities`
+This provides information about what capabilities the
   Kubernetes cluster supports.
   - `Capabilities.APIVersions` is a set of versions.
   - `Capabilities.APIVersions.Has $version` indicates whether a version (e.g.,
@@ -71,7 +83,9 @@ access in your templates.
   - `Capabilities.HelmVersion.GitCommit` is the Helm git sha1.
   - `Capabilities.HelmVersion.GitTreeState` is the state of the Helm git tree.
   - `Capabilities.HelmVersion.GoVersion` is the version of the Go compiler used.
-- `Template`: Contains information about the current template that is being
+
+# `Template`
+* Contains information about the current template that is being
   executed
   - `Template.Name`: A namespaced file path to the current template (e.g.
     `mychart/templates/mytemplate.yaml`)
