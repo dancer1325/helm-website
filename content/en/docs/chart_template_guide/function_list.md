@@ -4,27 +4,8 @@ description: "A list of template functions available in Helm"
 weight: 6
 ---
 
-Helm includes many template functions you can take advantage of in templates.
-They are listed here and broken down by the following categories:
-
-* [Cryptographic and Security](#cryptographic-and-security-functions)
-* [Date](#date-functions)
-* [Dictionaries](#dictionaries-and-dict-functions)
-* [Encoding](#encoding-functions)
-* [File Path](#file-path-functions)
-* [Kubernetes and Chart](#kubernetes-and-chart-functions)
-* [Logic and Flow Control](#logic-and-flow-control-functions)
-* [Lists](#lists-and-list-functions)
-* [Math](#math-functions)
-* [Float Math](#float-math-functions)
-* [Network](#network-functions)
-* [Reflection](#reflection-functions)
-* [Regular Expressions](#regular-expressions)
-* [Semantic Versions](#semantic-version-functions)
-* [String](#string-functions)
-* [Type Conversion](#type-conversion-functions)
-* [URL](#url-functions)
-* [UUID](#uuid-functions)
+* goal
+  * built-in template functions
 
 ## Logic and Flow Control Functions
 
@@ -225,23 +206,6 @@ false | ternary "foo" "bar"
 The above returns `"bar"`.
 
 ## String Functions
-
-Helm includes the following string functions: [abbrev](#abbrev),
-[abbrevboth](#abbrevboth), [camelcase](#camelcase), [cat](#cat),
-[contains](#contains), [hasPrefix](#hasprefix-and-hassuffix),
-[hasSuffix](#hasprefix-and-hassuffix), [indent](#indent), [initials](#initials),
-[kebabcase](#kebabcase), [lower](#lower), [nindent](#nindent),
-[nospace](#nospace), [plural](#plural), [print](#print), [printf](#printf),
-[println](#println), [quote](#quote-and-squote),
-[randAlpha](#randalphanum-randalpha-randnumeric-and-randascii),
-[randAlphaNum](#randalphanum-randalpha-randnumeric-and-randascii),
-[randAscii](#randalphanum-randalpha-randnumeric-and-randascii),
-[randNumeric](#randalphanum-randalpha-randnumeric-and-randascii),
-[repeat](#repeat), [replace](#replace), [shuffle](#shuffle),
-[snakecase](#snakecase), [squote](#quote-and-squote), [substr](#substr),
-[swapcase](#swapcase), [title](#title), [trim](#trim), [trimAll](#trimall),
-[trimPrefix](#trimprefix), [trimSuffix](#trimsuffix), [trunc](#trunc),
-[untitle](#untitle), [upper](#upper), [wrap](#wrap), and [wrapWith](#wrapwith).
 
 ### print
 
@@ -562,28 +526,31 @@ cat "hello" "beautiful" "world"
 
 The above produces `hello beautiful world`
 
-### indent
+### `indent`
 
-The `indent` function indents every line in a given string to the specified
-indent width. This is useful when aligning multi-line strings:
+* == function /
+  * | EVERY line, indents by the specified indent width
+* uses
+  * align MULTI-line strings
+
+* `indent indentWidth stringVariable`
 
 ```
+# | EVERY line of text, indent 4 space characters
 indent 4 $lots_of_text
 ```
 
-The above will indent every line of text by 4 space characters.
+### `nindent`
 
-### nindent
+* == function /
+  * == `indent` + | beginning of the string, 👀add a NEW line👀
 
-The `nindent` function is the same as the indent function, but prepends a new
-line to the beginning of the string.
+* `nindent indentWidth stringVariable`
 
 ```
+# add NEW line | BEGINNING, + indent every line by 4 space characters
 nindent 4 $lots_of_text
 ```
-
-The above will indent every line of text by 4 space characters and add a new
-line to the beginning.
 
 ### replace
 
@@ -1261,31 +1228,43 @@ toDate "2006-01-02" "2017-12-31" | date "02/01/2006"
 
 ## Dictionaries and Dict Functions
 
-Helm provides a key/value storage type called a `dict` (short for "dictionary",
-as in Python). A `dict` is an _unordered_ type.
+* `dict`
+  * == "dictionary"
+  * == key/value storage type 
+    * key
+      * requirements
+        * == ⚠️string⚠️
+    * value
+      * ALLOWED ANY type (ALSO another `dict` or `list`)
+  * characteristics
+    * ⚠️_unordered_⚠️
+    * 👀NOT immutable == mutable👀
+      * != [`list`](#lists-and-list-functions)
+  * built-in functions
+    * [`set`](#set)
+    * [`unset`](#unset)
+    * [`deepCopy` & `mustDeepCopy`](#deepcopy-mustdeepcopy),
+    * [`dict`](#dict),
+    * [`dig`](#dig),
+    * [`get`](#get),
+    * [`hasKey`](#haskey),
+    * [`keys`](#keys),
+    * [`merge` & `mustMerge`](#merge-mustmerge),
+    * [`mergeOverwrite` `mustMergeOverwrite`](#mergeoverwrite-mustmergeoverwrite),
+    * [`omit`](#omit),
+    * [`pick`](#pick),
+    * [`pluck`](#pluck),
+    * [`values`](#values)
 
-The key to a dictionary **must be a string**. However, the value can be any
-type, even another `dict` or `list`.
+### `dict`
 
-Unlike `list`s, `dict`s are not immutable. The `set` and `unset` functions will
-modify the contents of a dictionary.
-
-Helm provides the following functions to support working with dicts: [deepCopy
-(mustDeepCopy)](#deepcopy-mustdeepcopy), [dict](#dict), [dig](#dig), [get](#get),
-[hasKey](#haskey), [keys](#keys), [merge (mustMerge)](#merge-mustmerge),
-[mergeOverwrite (mustMergeOverwrite)](#mergeoverwrite-mustmergeoverwrite),
-[omit](#omit), [pick](#pick), [pluck](#pluck), [set](#set), [unset](#unset), and
-[values](#values).
-
-### dict
-
-Creating dictionaries is done by calling the `dict` function and passing it a
-list of pairs.
-
-The following creates a dictionary with three items:
+* function /
+  * 👀create dictionaries👀
+  * accepts list of pairs
 
 ```
-$myDict := dict "name1" "value1" "name2" "value2" "name3" "value 3"
+# dict / has 3 items
+$myDict := dict "key1" "value1" "key2" "value2" "key3" "value3"
 ```
 
 ### get
