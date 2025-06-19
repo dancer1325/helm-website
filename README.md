@@ -2,6 +2,7 @@
 
 
 * hosted | [here](https://helm.sh/)
+* [docs](content/en)
 
 ## Development
 
