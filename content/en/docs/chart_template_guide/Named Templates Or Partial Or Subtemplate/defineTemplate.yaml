@@ -1,0 +1,8 @@
+{{- /* named template*/ -}}   # added to avoid lint error
+
+# 1. named template / wrap Kubernetes block of labels
+{{- define "mychart.labels" }}
+labels:
+  generator: helm
+  date: {{ now | htmlDate }}
+{{- end }}

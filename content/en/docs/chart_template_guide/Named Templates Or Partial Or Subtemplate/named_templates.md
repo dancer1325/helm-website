@@ -4,41 +4,43 @@ description: "How to define named templates."
 weight: 9
 ---
 
-It is time to move beyond one template, and begin to create others. In this
-section, we will see how to define _named templates_ in one file, and then use
-them elsewhere. A _named template_ (sometimes called a _partial_ or a
-_subtemplate_) is simply a template defined inside of a file, and given a name.
-We'll see two ways to create them, and a few different ways to use them.
+* goal
+  * about _named templates_,
+    * how to define them | file,
+    * how to use
 
-In the [Flow Control](./control_structures.md) section we introduced three actions
-for declaring and managing templates: `define`, `template`, and `block`. In this
-section, we'll cover those three actions, and also introduce a special-purpose
-`include` function that works similarly to the `template` action.
+* _named template_
+  * OR _partial_ OR _subtemplate_
+  * 👀:= template / defined | file + given name👀
+    * ⚠️template names are global⚠️
+      * -> 👀if you declare 2 templates / SAME name -> LAST loaded will be the one used👀
+      * recommendations
+        * 👀name your templates /
+          * _chart-specific names_👀
+            * == `chartName-*`  — prefix —
+            * Reason: 🧠 templates | subcharts + top-level templates -- are -- compiled together 🧠
+            ```
+            {{ define "chartName.namedTemplateToGive" }}
+            ```
+          * _chart-version-specific names_👀
+            * Reason: 🧠SAME as before🧠
+            ```
+            {{ define "chartName.versionChart.namedTemplateToGive" }}
+            ```
+  * ways to access them
+    * by name EVERYWHERE
 
-An important detail to keep in mind when naming templates: **template names are
-global**. If you declare two templates with the same name, whichever one is
-loaded last will be the one used. Because templates in subcharts are compiled
-together with top-level templates, you should be careful to name your templates
-with _chart-specific names_.
+* functions -- to -- manage named templates
+  * `define`
+  * `template`
+  * `block`
+  * `include`
+    * ⚠️ONLY AVAILABLE | named templates⚠️
+    * 's behavior == `template`'s behavior
 
-One popular naming convention is to prefix each defined template with the name
-of the chart: `{{ define "mychart.labels" }}`. By using the specific chart name
-as a prefix we can avoid any conflicts that may arise due to two different
-charts that implement templates of the same name.
+## Partials & `_` files
 
-This behavior also applies to different versions of a chart. If you have
-`mychart` version `1.0.0` that defines a template one way, and a `mychart`
-version `2.0.0` that modifies the existing named template, it will use the one
-that was loaded last. You can work around this issue by also adding a version
-in the name of the chart: `{{ define "mychart.v1.labels" }}` and
-`{{ define "mychart.v2.labels" }}`.
-
-## Partials and `_` files
-
-So far, we've used one file, and that one file has contained a single template.
-But Helm's template language allows you to create named embedded templates, that
-can be accessed by name elsewhere.
-
+* TODO: 
 Before we get to the nuts-and-bolts of writing those templates, there is file
 naming convention that deserves mention:
 
@@ -53,53 +55,36 @@ These files are used to store partials and helpers. In fact, when we first
 created `mychart`, we saw a file called `_helpers.tpl`. That file is the default
 location for template partials.
 
-## Declaring and using templates with `define` and `template`
+## Declaring and using templates -- via -- `define` & `template`
 
-The `define` action allows us to create a named template inside of a template
-file. Its syntax goes like this:
+* `define`
+  * == action /
+    * 👀create a named template | template file👀
 
-```yaml
-{{- define "MY.NAME" }}
-  # body of template here
-{{- end }}
-```
+    ```yaml
+    {{- define "MY.NAME" }}
+      # body of template here
+    {{- end }}
+    ```
+  * uses
+    * encapsulate a Kubernetes block of labels
+  * ❌by itself, NOT produce output❌
+  * by convention,
+    * it should have a SIMPLE documentation block / describe it
+      ```
+      {{/* ... */}}
+      ```
 
-For example, we can define a template to encapsulate a Kubernetes block of
-labels:
+* `template`
+  * == action /
+    * embed named templates | other files (TODO: only valid | Kubernetes manifests ❓)
+      * 👀== output `define` 👀
 
-```yaml
-{{- define "mychart.labels" }}
-  labels:
-    generator: helm
-    date: {{ now | htmlDate }}
-{{- end }}
-```
+* how does the template engine reads the file / has `define` & `template`?
+  * if it finds `define` -> store away the reference
+  * once it finds `template` -> that reference is called -> render that template inline
 
-Now we can embed this template inside of our existing ConfigMap, and then
-include it with the `template` action:
-
-```yaml
-{{- define "mychart.labels" }}
-  labels:
-    generator: helm
-    date: {{ now | htmlDate }}
-{{- end }}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-configmap
-  {{- template "mychart.labels" }}
-data:
-  myvalue: "Hello World"
-  {{- range $key, $val := .Values.favorite }}
-  {{ $key }}: {{ $val | quote }}
-  {{- end }}
-```
-
-When the template engine reads this file, it will store away the reference to
-`mychart.labels` until `template "mychart.labels"` is called. Then it will
-render that template inline. So the result will look like this:
-
+TODO: create a helm chart & check it
 ```yaml
 # Source: mychart/templates/configmap.yaml
 apiVersion: v1
@@ -115,9 +100,6 @@ data:
   food: "pizza"
 ```
 
-Note: a `define` does not produce output unless it is called with a template,
-as in this example.
-
 Conventionally, Helm charts put these templates inside of a partials file,
 usually `_helpers.tpl`. Let's move this function there:
 
@@ -129,9 +111,6 @@ usually `_helpers.tpl`. Let's move this function there:
     date: {{ now | htmlDate }}
 {{- end }}
 ```
-
-By convention, `define` functions should have a simple documentation block
-(`{{/* ... */}}`) describing what they do.
 
 Even though this definition is in `_helpers.tpl`, it can still be accessed in
 `configmap.yaml`:
