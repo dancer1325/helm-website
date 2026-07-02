@@ -1,7 +1,4 @@
-![github-banner-helm-helmwww](https://user-images.githubusercontent.com/686194/68531441-f4ad4e00-02c6-11ea-982b-74d7c3ff0071.png)
-
-
-* hosted | [here](https://helm.sh/)
+* published [here](https://helm.sh/)
 * [docs](content/en)
 
 ## Development

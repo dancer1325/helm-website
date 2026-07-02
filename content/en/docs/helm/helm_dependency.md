@@ -3,7 +3,7 @@ title: "Helm Dependency"
 ---
 
 * ⚠️generated -- from -- source code⚠️
-* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/pull.go)'s `func newPullCmd(`👀
+* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/dependency.go)'s `func newDependencyCmd(`👀
 
 ## helm dependency
 
