@@ -2,6 +2,9 @@
 title: "Helm Pull"
 ---
 
+* ⚠️generated -- from -- source code⚠️
+* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/pull.go)'s `func newPullCmd(`👀
+
 ## helm pull
 
 download a chart from a repository and (optionally) unpack it in local directory

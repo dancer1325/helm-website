@@ -1,40 +1,34 @@
 ---
-title: "Helm Rollback"
+title: "Helm Test"
 ---
 
-## helm rollback
+* ⚠️generated -- from -- source code⚠️
+* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/release_testing.go)'s `func newRollbackCmd(`👀
 
-roll back a release to a previous revision
+## helm test
+
+run tests for a release
 
 ### Synopsis
 
 
-This command rolls back a release to a previous revision.
+The test command runs the tests for a release.
 
-The first argument of the rollback command is the name of a release, and the
-second is a revision (version) number. If this argument is omitted or set to
-0, it will roll back to the previous release.
-
-To see revision numbers, run 'helm history RELEASE'.
+The argument this command takes is the name of a deployed release.
+The tests to be run are defined in the chart that was installed.
 
 
 ```
-helm rollback <RELEASE> [REVISION] [flags]
+helm test [RELEASE] [flags]
 ```
 
 ### Options
 
 ```
-      --cleanup-on-fail    allow deletion of new resources created in this rollback when rollback fails
-      --dry-run            simulate a rollback
-      --force              force resource update through delete/recreate if needed
-  -h, --help               help for rollback
-      --history-max int    limit the maximum number of revisions saved per release. Use 0 for no limit (default 10)
-      --no-hooks           prevent hooks from running during rollback
-      --recreate-pods      performs pods restart for the resource if applicable
+      --filter strings     specify tests by attribute (currently "name") using attribute=value syntax or '!attribute=value' to exclude a test (can specify multiple or separate values with commas: name=test1,name=test2)
+  -h, --help               help for test
+      --logs               dump the logs from test pods (this runs after all tests are complete, but before any cleanup)
       --timeout duration   time to wait for any individual Kubernetes operation (like Jobs for hooks) (default 5m0s)
-      --wait               if set, will wait until all Pods, PVCs, Services, and minimum number of Pods of a Deployment, StatefulSet, or ReplicaSet are in a ready state before marking the release as successful. It will wait for as long as --timeout
-      --wait-for-jobs      if set and --wait enabled, will wait until all Jobs have been completed before marking the release as successful. It will wait for as long as --timeout
 ```
 
 ### Options inherited from parent commands
