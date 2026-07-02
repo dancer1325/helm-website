@@ -115,7 +115,7 @@ upgrade, and rollback.
 
 ## Repository (Repo, Chart Repository)
 
-* := HTTP servers which
+* := HTTP servers /
   * store packaged helm charts                             -- Check 'helm-examples' repo --
   * serves an `index.yaml`                        
     * /
@@ -137,7 +137,3 @@ upgrade, and rollback.
 * ways to pass customized values
   * `-f otherValue.yaml`
   * `--set key=value`
-
-
-# Notes
-* Chart of example can be found under the repo 'helm-examples'

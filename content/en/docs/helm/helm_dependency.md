@@ -2,6 +2,9 @@
 title: "Helm Dependency"
 ---
 
+* ⚠️generated -- from -- source code⚠️
+* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/pull.go)'s `func newPullCmd(`👀
+
 ## helm dependency
 
 manage a chart's dependencies

@@ -7,4 +7,5 @@ slug: helm
 
 # Helm Commands
 
-Here you’ll find the list of CLI commands for Helm, with help info on their usage.
+* ⚠️generated -- from -- source code⚠️
+* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/)

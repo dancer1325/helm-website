@@ -8,7 +8,9 @@ aliases: [
 weight: 1
 ---
 
-Helm uses a packaging format called _charts_. A chart is a collection of files
+* _charts_ OR _Helm chart_
+  * 
+Helm uses a packaging format called  A chart is a collection of files
 that describe a related set of Kubernetes resources. A single chart might be
 used to deploy something simple, like a memcached pod, or something complex,
 like a full web app stack with HTTP servers, databases, caches, and so on.
@@ -300,10 +302,11 @@ charts/
   mysql-3.2.1.tgz
 ```
 
-#### Alias field in dependencies
+#### `dependencies[*].alias`
 
-In addition to the other fields above, each requirements entry may contain the
-optional field `alias`.
+* OPTIONAL
+* allows
+  * access -- , via another name, to -- chart
 
 Adding an alias for a dependency chart would put a chart in dependencies using
 alias as name of new dependency.
@@ -531,6 +534,7 @@ from subchart1.
 
 ### Managing Dependencies manually via the `charts/` directory
 
+* == copy the dependant unpacked charts under “charts/”
 If more control over dependencies is desired, these dependencies can be
 expressed explicitly by copying the dependency charts into the `charts/`
 directory.
@@ -558,8 +562,8 @@ wordpress:
 The example above shows how the WordPress chart expresses its dependency on
 Apache and MySQL by including those charts inside of its `charts/` directory.
 
-**TIP:** _To drop a dependency into your `charts/` directory, use the `helm
-pull` command_
+* steps
+  * `helm pull`
 
 ### Operational aspects of using dependencies
 

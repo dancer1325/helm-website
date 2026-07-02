@@ -5,9 +5,13 @@ aliases: ["/docs/chart_repository/"]
 weight: 6
 ---
 
-This section explains how to create and work with Helm chart repositories. At a
-high level, a chart repository is a location where packaged charts can be stored
-and shared.
+* goal
+  * how to create & work -- with -- Helm chart repositories
+
+* Chart repository
+  * [here](../gl)
+    high level, a chart repository is a location where packaged charts can be stored
+    and shared.
 
 The distributed community Helm chart repository is located at
 [Artifact Hub](https://artifacthub.io/packages/search?kind=0) and welcomes
@@ -25,8 +29,12 @@ A _chart repository_ is an HTTP server that houses an `index.yaml` file and
 optionally some packaged charts.  When you're ready to share your charts, the
 preferred way to do so is by uploading them to a chart repository.
 
-As of Helm 2.2.0, client-side SSL auth to a repository is supported. Other
-authentication protocols may be available as plugins.
+* authentication protocols
+  * supported
+    * client-side SSL
+      * requirements: ⚠️Helm 2.2.0⚠️
+    * plugins
+
 
 Because a chart repository can be any HTTP server that can serve YAML and tar
 files and can answer GET requests, you have a plethora of options when it comes
@@ -110,9 +118,7 @@ entries:
 generated: 2016-10-06T16:23:20.499029981-06:00
 ```
 
-## Hosting Chart Repositories
-
-This part shows several ways to serve a chart repository.
+## ways to host a Chart Repository
 
 ### Google Cloud Storage
 
@@ -147,14 +153,14 @@ Similarly, you can also set up chart repositories using JFrog Artifactory. Read 
 chart repositories with JFrog Artifactory
 [here](https://www.jfrog.com/confluence/display/RTF/Helm+Chart+Repositories)
 
-### GitHub Pages example
+### GitHub Pages
 
-In a similar way you can create charts repository using GitHub Pages.
-
-GitHub allows you to serve static web pages in two different ways:
-
-- By configuring a project to serve the contents of its `docs/` directory
-- By configuring a project to serve a particular branch
+* allows you
+  * serve static web pages
+* ways
+  * configure a project / 
+    * serve the contents / placed | "docs/"
+    * serve a particular branch
 
 We'll take the second approach, though the first is just as easy.
 
@@ -212,18 +218,23 @@ charts inside of that folder.
 
 ### ChartMuseum Repository Server
 
-ChartMuseum is an open-source Helm Chart Repository server written in Go
-(Golang), with support for cloud storage backends, including [Google Cloud
-Storage](https://cloud.google.com/storage/), [Amazon
-S3](https://aws.amazon.com/s3/), [Microsoft Azure Blob
-Storage](https://azure.microsoft.com/en-us/services/storage/blobs/), [Alibaba
-Cloud OSS Storage](https://www.alibabacloud.com/product/oss), [Openstack Object
-Storage](https://developer.openstack.org/api-ref/object-store/), [Oracle Cloud
-Infrastructure Object Storage](https://cloud.oracle.com/storage), [Baidu Cloud
-BOS Storage](https://cloud.baidu.com/product/bos.html), [Tencent Cloud Object
-Storage](https://intl.cloud.tencent.com/product/cos), [DigitalOcean
-Spaces](https://www.digitalocean.com/products/spaces/),
-[Minio](https://min.io/), and [etcd](https://etcd.io/).
+* Helm Chart Repository server
+  * open-source
+  * written | Go
+  * support
+    * cloud storage backends
+      * _Examples:_ 
+      * [Google Cloud Storage](https://cloud.google.com/storage/)
+      * [Amazon S3](https://aws.amazon.com/s3/)
+      * [Microsoft Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
+      * [Alibaba Cloud OSS Storage](https://www.alibabacloud.com/product/oss)
+      * [Openstack Object Storage](https://developer.openstack.org/api-ref/object-store/)
+      * [Oracle Cloud Infrastructure Object Storage](https://cloud.oracle.com/storage)
+      * [Baidu Cloud BOS Storage](https://cloud.baidu.com/product/bos.html)
+      * [Tencent Cloud Object Storage](https://intl.cloud.tencent.com/product/cos)
+      * [DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/)
+      * [Minio](https://min.io/)
+      * [etcd](https://etcd.io/)
 
 You can also use the
 [ChartMuseum](https://chartmuseum.com/docs/#using-with-local-filesystem-storage)
