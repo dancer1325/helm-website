@@ -2,6 +2,9 @@
 title: "Helm Install"
 ---
 
+* ⚠️generated -- from -- source code⚠️
+* 👀see [here](https://github.com/dancer1325/helm/blob/main/pkg/cmd/install.go)'s `func newInstallCmd(`👀
+
 ## helm install
 
 install a chart
